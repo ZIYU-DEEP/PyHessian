@@ -73,6 +73,33 @@ optional arguments:
 
 The output density plot is saved as example.pdf 
 
+### Getting the Trace of Hessian for a model
+```python
+# Set the torch model into evaluation mode
+model.eval()
+
+# Create loss function
+criterion = torch.nn.CrossEntropyLoss()
+
+# Get dataset 
+train_loader, test_loader = getData()
+
+# For illustrate, we only use one batch to do the tutorial
+# Check the detail of this – maybe we should use a large batch size
+for inputs, targets in train_loader:
+    break
+
+# we use cuda to make the computation fast
+model = model.cuda()
+inputs, targets = inputs.cuda(), targets.cuda()
+
+# create the hessian computation module
+hessian_comp = hessian(model, criterion, data=(inputs, targets), cuda=True)
+
+# Get the trace of the hessian
+trace = hessian_comp.trace()
+print("The trace of this model is: %.4f"%(np.mean(trace)))
+```
 
 ## Citation
 PyHessian has been developed as part of the following paper. We appreciate it if you would please cite the following paper if you found the library useful for your work:
