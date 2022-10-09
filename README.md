@@ -75,6 +75,9 @@ The output density plot is saved as example.pdf
 
 ### Getting the Trace of Hessian for a model
 ```python
+# Import the package
+from pyhessian import hessian
+
 # Set the torch model into evaluation mode
 model.eval()
 
